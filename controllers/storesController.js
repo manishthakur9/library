@@ -1,6 +1,4 @@
 const storesModel = require("../models/storesModel");
-const storesController = require("../models/storesModel");
-
 const storesController = require("express").Router();
 
 storesController.get("/", (req , res) =>{
@@ -15,19 +13,6 @@ storesController.get("/", (req , res) =>{
             error : err
         });
 
-    });
-
-});
-
-
-let {id} = req.params;
-storesModel.findById(id).then((result)=>{
-    return res.status(200).json({
-        data: result
-    }); 
-}).catch((err)=>{
-    return res.status(400).json({
-        error: err
     });
 
 });
@@ -48,10 +33,10 @@ storesController.get("/:id", (req, res) => {
 
 });
 
-    storesController.post("/:", (req, res) => {
+    storesController.post("/", (req, res) => {
         let body = req.body;
 
-        let stores = new storesModel1(body);
+        let stores = new storesModel(body);
         stores.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -68,10 +53,10 @@ storesController.get("/:id", (req, res) => {
     });
 
 
-    storesController.post("/blockid",(req , res)=> {
+    storesController.post("/",(req , res)=> {
         let body = req.body;
 
-        let stores =new storesModel1(body);
+        let stores =new storesModel(body);
         stores.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -86,10 +71,10 @@ storesController.get("/:id", (req, res) => {
 
     });
 
-    storesController.post("/:bookid",( req, res) =>{
+    storesController.post("/",( req, res) =>{
             let body = req.body;
 
-            let stores =new storesModel1(body);
+            let stores =new storesModel(body);
             stores.save().then((result) =>{
                 return res.status(201).json({
                     insertedId : result._id,
@@ -106,10 +91,10 @@ storesController.get("/:id", (req, res) => {
 
         });
 
-        storesController.post("/:quantity", (req, res) =>{
+        storesController.post("/", (req, res) =>{
             let body =req.body;
 
-            let stores =new storesModel1(body);
+            let stores =new storesModel(body);
             stores.save().then((result) =>{
                 return res.status(201).json({
                     insertedId : result._id,
@@ -126,10 +111,10 @@ storesController.get("/:id", (req, res) => {
     
         });
 
-        storesController.post("/:row", (req , res) =>{
+        storesController.post("/:", (req , res) =>{
             let body= req.body;
             
-            let stores = new storesModel1(body);
+            let stores = new storesModel(body);
             stores.save().then((result)  =>{
                 return res.status(201).json({
                     insertedId : result._id,
@@ -144,10 +129,10 @@ storesController.get("/:id", (req, res) => {
 
         });
 
-        storesController.post('/:column',(req , res)  =>{
+        storesController.post('/',(req , res)  =>{
             let body = req.body;
 
-            let stores = new storesModel1(body);
+            let stores = new storesModel(body);
             stores.save().then((result) =>{
                 return res.status(201).json({
                     insertedId : result._id,
@@ -163,11 +148,11 @@ storesController.get("/:id", (req, res) => {
             
         });
 
-        storesController.put("/:blockid",(req, res) => {
+        storesController.put("/:id",(req, res) => {
          let{blockid} = req.params;
          let body = req.body;
 
-         storesModel1.findByIdAndUpdate(id, body).then((result) =>{
+         storesModel.findByIdAndUpdate(id, body).then((result) =>{
              return res.status(200).json({
                  affectedId: result._id,
                  message: " The blockid  has been updated"
@@ -219,7 +204,7 @@ storesController.get("/:id", (req, res) => {
     
     
     
-    //  storesController.delete("/:column", (req, res)=>{
+    //  storesController.delete("/:id", (req, res)=>{
     //      let {column} = req.params;
         
     //      storesModel.findByIdAndDelete(id).then((result)=>{

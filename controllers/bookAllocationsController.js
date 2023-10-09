@@ -1,7 +1,5 @@
 const { model } = require("mongoose");
-const bookAllocationsModel = require("../mdels/bookAllocationsModel1");
-const bookAllocationsController = require("../mdels/bookAllocationsModel1");
-
+const bookAllocationsModel = require("../models/bookAllocationsModel1");
 const bookAllocationsController = require("express").Router();
 
 bookAllocationsController.get("/",(req , res)=>{
@@ -20,20 +18,6 @@ bookAllocationsController.get("/",(req , res)=>{
 
 });
 
-let{id} = req.params;
-bookAllocationsModel.findById().then((result) =>{
-    return res.status(200).json({
-        data : result
-
-    });
-
-}).catch((err) =>{
-    return res.status(400).json({
-        error : err
-
-    });
-
-});
 
 bookAllocationsController.get("/id", (req , res) =>{
     let{id}= req.params;
@@ -56,7 +40,7 @@ bookAllocationsController.get("/id", (req , res) =>{
     bookAllocationsController.post("/", (req , res) =>{        
         let body = req.body;
 
-        let bookAllocations = new bookAllocationsModel1(body);
+        let bookAllocations = new bookAllocationsModel(body);
         bookAllocations.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -74,10 +58,10 @@ bookAllocationsController.get("/id", (req , res) =>{
         });
 
 
-    bookAllocationsController.post("/id",(req , res) =>{
+    bookAllocationsController.post("/",(req , res) =>{
         let body = req.body;
 
-        let bookAllocations = new bookAllocationsModel1(body);
+        let bookAllocations = new bookAllocationsModel(body);
         bookAllocations.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -95,10 +79,10 @@ bookAllocationsController.get("/id", (req , res) =>{
 
     });
 
-    bookAllocationsController.post("/studentid", (req , res) =>{
+    bookAllocationsController.post("/", (req , res) =>{
         let body = req.body;
 
-        let bookAllocations = new bookAllocationsModel1(body);
+        let bookAllocations = new bookAllocationsModel(body);
         bookAllocations.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -115,10 +99,10 @@ bookAllocationsController.get("/id", (req , res) =>{
 
     });
 
-    bookAllocationsController.post("/bookid", (req , res) =>{
+    bookAllocationsController.post("/", (req , res) =>{
         let body = req.body;
 
-        let bookAllocations = new bookAllocationsModel1(body);
+        let bookAllocations = new bookAllocationsModel(body);
         bookAllocations.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -136,10 +120,10 @@ bookAllocationsController.get("/id", (req , res) =>{
 
     });
 
-    bookAllocationsController.post("/blockid", (req , res) =>{
+    bookAllocationsController.post("/", (req , res) =>{
         let body = req.body;
 
-        let bookAllocations = new bookAllocationsModel1(body);
+        let bookAllocations = new bookAllocationsModel(body);
         bookAllocations.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -157,10 +141,10 @@ bookAllocationsController.get("/id", (req , res) =>{
 
     });
 
-    bookAllocationsController.post("/issuedfrom", (req , res) =>{
+    bookAllocationsController.post("/", (req , res) =>{
         let body = req.body;
         body.issuedTime = new Date();
-        let bookAllocations = new bookAllocationsModel1(body);
+        let bookAllocations = new bookAllocationsModel(body);
         bookAllocations.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -178,10 +162,10 @@ bookAllocationsController.get("/id", (req , res) =>{
     });    
 
 
-    bookAllocationsController.post("/issuedtill", (req , res) =>{
+    bookAllocationsController.post("/", (req , res) =>{
         let body = req.body;
         body.returnedTime = new Date();
-        let bookAllocations = new bookAllocationsModel1(body);
+        let bookAllocations = new bookAllocationsModel(body);
         bookAllocations.save().then((result) =>{
             return res.status(201).json({
                 insertedId : result._id,
@@ -198,7 +182,46 @@ bookAllocationsController.get("/id", (req , res) =>{
 
     });
 
+    bookAllocationsController.post("/",(req , res) =>{
+        let body = req.body;
+        body.issuedTime = new Date();
+        let bookAllocations = new bookAllocationsModel(body);
+        bookAllocations.save().then ((result) =>{
+            return res.status(201).json({
+                insertedId : result._id,
+                message : "Issued Time has been added."
 
+            });
+
+        }).catch((err) =>{
+            return res.status(400).json({
+                error : err
+
+            });
+
+        });
+
+    });
+      bookAllocationsController.post("/", (req , res) =>{
+        let body = req.body;
+        body.returnedTime = new Date();
+        let bookAllocations = new bookAllocationsModel(body);
+        bookAllocations.save().then((result) =>{
+            return res.status(201).json({
+                insertedId : result._id,
+                message : "Returned Time has been added"
+
+            });
+            
+        }).catch((err) =>{
+            return res.status(400).json({
+                error : err
+
+            });
+
+        });
+
+    });
     
 
 module.exports = bookAllocationController;

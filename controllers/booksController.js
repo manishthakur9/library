@@ -6,12 +6,17 @@ booksController.get("/", (req, res) => {
     booksModel.find().then((result)=>{
         return res.status(200).json({
             data: result
+
         });
+
     }).catch((err)=>{
         return res.status(400).json({
             error: err
+
         });
+
     });
+
 });
 
 
@@ -20,12 +25,17 @@ booksController.get("/:id", (req, res) => {
     booksModel.findById(id).then((result)=>{
         return res.status(200).json({
             data: result
+
         }); 
+
     }).catch((err)=>{
         return res.status(400).json({
             error: err
+
         });
+
     });
+
 });
 
 
@@ -37,12 +47,17 @@ booksController.post("/", (req, res)=>{
         return res.status(201).json({
             insertedId: result._id,
             message: "New book has been adedd."
+
         });
+
     }).catch((err)=>{
         return res.status(400).json({
             error: err
+
         });
+
     });
+
 });
 
 
@@ -55,12 +70,17 @@ booksController.put("/:id", (req, res)=>{
         return res.status(200).json({
             affectedId: result._id,
             message: "The book has been updated."
+
         });
+
     }).catch((err)=>{
         return res.status(400).json({
             error: err
+
         });
+
     });
+
 });
 
 
@@ -72,12 +92,17 @@ booksController.patch("/:id/name", (req, res)=>{
         return res.status(200).json({
             affectedId: result._id,
             message: "The books name has been updated."
+
         });
+
     }).catch((err)=>{
         return res.status(400).json({
             error: err
+
         });
+
     });
+
 });
 
 
@@ -89,14 +114,18 @@ booksController.patch("/:id/author", (req, res)=>{
         return res.status(200).json({
             affectedId: result._id,
             message: "The books author has been updated."
+
         });
+
     }).catch((err)=>{
         return res.status(400).json({
             error: err
-        });
-    });
-});
 
+        });
+
+    });
+
+});
 
 
 booksController.delete("/:id", (req, res)=>{
@@ -106,12 +135,17 @@ booksController.delete("/:id", (req, res)=>{
         return res.status(200).json({
             deletedId: result._id,
             message: "The books has been deleted."
+
         });
+
     }).catch((err)=>{
         return res.status(400).json({
             error: err
+
         });
+
     });
+    
 });
 
 module.exports = booksController;

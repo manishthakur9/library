@@ -8,7 +8,6 @@ const bookAllocationsSchema = new Schema ({
     blockid : Object,
     issuedfrom : Date,
     issuedtill : Date,
-    status : String,
     issuedTime : Date,
     returnedTime : Date, 
 });
